@@ -26,7 +26,7 @@ def download_module(src, dest, name, type, version):
         download_zip(src, dest, name)
 
 def download_git(src, dest, version):
-    if version == None:
+    if version is None:
         git.Repo.clone_from(src, dest)
     else:
         git.Repo.clone_from(src, dest, branch=version)
