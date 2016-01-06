@@ -41,4 +41,7 @@ def download_file(url, destdir):
 
 if __name__ == '__main__':
     args = sys.argv
+    if len(args) != 3:
+        print 'Usage: python %s <modules.yml> <dest_dir>' % args[0]
+        sys.exit(1)
     get_modules(args[1], args[2])
