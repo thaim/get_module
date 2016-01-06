@@ -14,6 +14,8 @@ def get_modules(yml_file, dest):
         download_module(data['url'], dest, data['name'], data['type'], data['version'])
 
 def download_module(src, dest, name, type, version):
+    if os.path.exists(dest + name):
+        return
     if type == 'git':
         download_git(src, dest + name, version)
     elif type == 'zip':
