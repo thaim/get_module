@@ -11,7 +11,11 @@ def get_modules(yml_file, dest):
     for data in yaml.load(file(yml_file)):
         if (not dest.endswith('/')):
             dest = dest + '/'
-        download_module(data['url'], dest, data['name'], data['type'], data['version'])
+        if not 'version' in data:
+            version = None
+        else:
+            version = data['version']
+        download_module(data['url'], dest, data['name'], data['type'], version)
 
 def download_module(src, dest, name, type, version):
     if os.path.exists(dest + name):
@@ -22,7 +26,10 @@ def download_module(src, dest, name, type, version):
         download_zip(src, dest, name)
 
 def download_git(src, dest, version):
-    git.Repo.clone_from(src, dest)
+    if version == None:
+        git.Repo.clone_from(src, dest)
+    else:
+        git.Repo.clone_from(src, dest, branch=version)
 
 def download_zip(src, dest, name):
     filename = download_file(src, dest)
