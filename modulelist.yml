@@ -1,0 +1,4 @@
+- name: get_module
+  url: https://github.com/thaim/get_module.git
+  type: git
+  version: master
