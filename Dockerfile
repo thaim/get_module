@@ -9,9 +9,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && /usr/bin/git config --global http.sslVerify false \
     && /usr/bin/curl -kL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python \
-    && /usr/bin/pip install requests \
-    && /usr/bin/pip install pyyaml \
-    && /usr/bin/pip install gitpython \
+    && pip install requests \
+    && pip install pyyaml \
+    && pip install gitpython \
     && mkdir /modules
 
 COPY get_modules.py /usr/local/bin/get_modules.py
