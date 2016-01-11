@@ -7,11 +7,11 @@ RUN apt-get update \
        git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && git config --global http.sslVerify false \
-    && pip install requests \
-    && pip install pyyaml \
-    && pip install gitpython \
-    && curl -kL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python \
+    && /usr/bin/git config --global http.sslVerify false \
+    && /usr/bin/pip install requests \
+    && /usr/bin/pip install pyyaml \
+    && /usr/bin/pip install gitpython \
+    && /usr/bin/curl -kL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python \
     && mkdir /modules
 
 COPY get_modules.py /usr/local/bin/get_modules.py
