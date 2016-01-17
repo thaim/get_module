@@ -4,6 +4,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        curl \
        python \
+       subversion \
        git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
@@ -12,6 +13,7 @@ RUN apt-get update \
     && pip install requests \
     && pip install pyyaml \
     && pip install gitpython \
+    && pip install svn \
     && mkdir /modules
 
 COPY get_modules.py /usr/local/bin/get_modules.py
