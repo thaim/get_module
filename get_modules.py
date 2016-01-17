@@ -5,6 +5,7 @@ import sys
 import requests
 import yaml
 import git
+import svn.remote
 import zipfile
 
 def get_modules(yml_file, dest):
@@ -22,6 +23,8 @@ def download_module(src, dest, name, type, version):
         return
     if type == 'git':
         download_git(src, dest + name, version)
+    elif type == 'svn':
+        download_svn(src, dest + name, version)
     elif type == 'zip':
         download_zip(src, dest, name)
 
@@ -30,6 +33,10 @@ def download_git(src, dest, version):
         git.Repo.clone_from(src, dest)
     else:
         git.Repo.clone_from(src, dest, branch=version)
+
+def download_svn(src, dest, version):
+    r = svn.remote.RemoteClient(src)
+    r.checkout(dest)
 
 def download_zip(src, dest, name):
     filename = download_file(src, dest)

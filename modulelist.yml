@@ -2,3 +2,7 @@
   url: https://github.com/thaim/get_module.git
   type: git
   version: master
+
+- name: spamassasin
+  url: http://svn.apache.org/repos/asf/spamassassin/trunk
+  type: svn
