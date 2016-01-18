@@ -16,8 +16,8 @@ RUN apt-get update \
     && pip install svn \
     && mkdir /modules
 
-COPY get_modules.py /usr/local/bin/get_modules.py
-COPY modulelist.yml /etc/modulelist.yml
+COPY ../get_modules.py /usr/local/bin/get_modules.py
+COPY ../modulelist.yml /etc/modulelist.yml
 
 VOLUME ["/modules"]
 
