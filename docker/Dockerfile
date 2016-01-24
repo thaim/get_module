@@ -18,9 +18,10 @@ RUN apt-get update \
 
 COPY ../get_modules.py /usr/local/bin/get_modules.py
 COPY ../modulelist.yml /etc/modulelist.yml
+COPY docker-entrypoint.sh /
 
 VOLUME ["/modules"]
 
-ENTRYPOINT ["/usr/local/bin/get_modules.py"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["/etc/modulelist.yml", "/modules/" ]
