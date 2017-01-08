@@ -9,7 +9,7 @@ import svn.remote
 import zipfile
 import argparse
 
-def get_modules(yml_file, dest):
+def get_modules(yml_file, dest, verbose):
     f = open(yml_file)
     for data in yaml.load(f):
         if (not dest.endswith('/')):
@@ -18,12 +18,19 @@ def get_modules(yml_file, dest):
             version = None
         else:
             version = data['version']
-        download_module(data['url'], dest, data['name'], data['type'], version)
+        download_module(data['url'], dest, data['name'], data['type'], version, verbose)
     f.close()
 
-def download_module(src, dest, name, type, version):
+def download_module(src, dest, name, type, version, verbose):
     if os.path.exists(dest + name):
+        if verbose: print(name + ' already exist')
         return
+
+    if verbose and version is not None:
+        print('download ' + name + ':' + version + ' (' + type + ')')
+    elif verbose:
+        print('download ' + name + ' (' + type + ')')
+
     if type == 'git':
         download_git(src, dest + name, version)
     elif type == 'svn':
@@ -64,9 +71,12 @@ def create_argparser():
                         help='list of modules to download')
     parser.add_argument('dest_dir',
                         help='dest directory to save modules')
+    parser.add_argument('-V', '--verbose',
+                        action='store_true',
+                        help='show verbose message')
 
     return parser
 
 if __name__ == '__main__':
     args = create_argparser().parse_args()
-    get_modules(args.modules, args.dest_dir)
+    get_modules(args.modules, args.dest_dir, args.verbose)
