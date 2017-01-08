@@ -7,6 +7,7 @@ import yaml
 import git
 import svn.remote
 import zipfile
+import argparse
 
 def get_modules(yml_file, dest):
     f = open(yml_file)
@@ -57,9 +58,15 @@ def download_file(url, destdir):
                 f.flush()
         return filename
 
+def create_argparser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('modules',
+                        help='list of modules to download')
+    parser.add_argument('dest_dir',
+                        help='dest directory to save modules')
+
+    return parser
+
 if __name__ == '__main__':
-    args = sys.argv
-    if len(args) != 3:
-        print('Usage: python %s <modules.yml> <dest_dir>' % args[0])
-        sys.exit(1)
-    get_modules(args[1], args[2])
+    args = create_argparser().parse_args()
+    get_modules(args.modules, args.dest_dir)
