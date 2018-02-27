@@ -14,7 +14,6 @@ RUN apt-get update \
     && mkdir /modules
 
 COPY ../get_modules.py /usr/local/bin/get_modules.py
-COPY ../modulelist.yml /etc/modulelist.yml
 
 VOLUME ["/modules"]
 
