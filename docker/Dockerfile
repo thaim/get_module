@@ -13,7 +13,7 @@ RUN apt-get update \
     && pip install svn \
     && mkdir /modules
 
-COPY ../get_modules.py /usr/local/bin/get_modules.py
+COPY get_modules.py /usr/local/bin/get_modules.py
 
 VOLUME ["/modules"]
 
